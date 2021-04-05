@@ -6,11 +6,11 @@ import java.time.LocalDateTime;
 
 public class CompleteAutorDTO {
 
-    private Long id;
-    private String name;
-    private String email;
-    private String description;
-    private LocalDateTime registrationDate;
+    private final Long id;
+    private final String name;
+    private final String email;
+    private final String description;
+    private final LocalDateTime registrationDate;
 
     public CompleteAutorDTO(Autor autor) {
         this.id = autor.getId();

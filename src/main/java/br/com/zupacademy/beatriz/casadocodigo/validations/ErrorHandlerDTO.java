@@ -2,8 +2,8 @@ package br.com.zupacademy.beatriz.casadocodigo.validations;
 
 public class ErrorHandlerDTO {
 
-    private String field;
-    private String error;
+    private final String field;
+    private final String error;
 
     public ErrorHandlerDTO(String field, String error) {
         this.field = field;

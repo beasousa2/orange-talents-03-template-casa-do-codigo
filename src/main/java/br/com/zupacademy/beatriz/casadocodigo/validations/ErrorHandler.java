@@ -2,7 +2,6 @@ package br.com.zupacademy.beatriz.casadocodigo.validations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContext;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -20,6 +19,7 @@ public class ErrorHandler {
     @Autowired
     private MessageSource messageSource;
 
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public List<ErrorHandlerDTO> handler(MethodArgumentNotValidException exception) {
@@ -34,4 +34,13 @@ public class ErrorHandler {
 
         return errorHandlerDTOList;
     }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(ExistingEmailException.class)
+    public String handlerEmail(ExistingEmailException existingEmailException) {
+        return existingEmailException.getMessage();
+    }
+
+
+
 }

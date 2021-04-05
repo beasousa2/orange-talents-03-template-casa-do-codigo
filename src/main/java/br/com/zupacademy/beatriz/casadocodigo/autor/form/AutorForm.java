@@ -1,13 +1,18 @@
 package br.com.zupacademy.beatriz.casadocodigo.autor.form;
 
 import br.com.zupacademy.beatriz.casadocodigo.autor.Autor;
+import br.com.zupacademy.beatriz.casadocodigo.autor.AutorRepository;
 import com.sun.istack.NotNull;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 public class AutorForm {
+
+    @Autowired
+    AutorRepository autorRepository;
 
     @NotNull
     @NotEmpty(message = "Nome é obrigatorio!")
@@ -24,19 +29,11 @@ public class AutorForm {
     private String description;
 
     public Autor register() {
-
         return new Autor(name, email, description);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
+   public String getEmail() {
         return email;
     }
 
-    public String getDescription() {
-        return description;
-    }
 }

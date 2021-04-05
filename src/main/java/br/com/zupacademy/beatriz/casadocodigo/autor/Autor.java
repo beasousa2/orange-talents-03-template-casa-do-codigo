@@ -9,16 +9,17 @@ import java.time.LocalDateTime;
 @Entity
 public class Autor {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private final LocalDateTime registrationDate = LocalDateTime.now();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String email;
     private String description;
-    private final LocalDateTime registrationDate = LocalDateTime.now();
 
     @Deprecated
-    public Autor() {}
+    public Autor() {
+    }
 
     public Autor(String name, String email, String description) {
         this.name = name;
