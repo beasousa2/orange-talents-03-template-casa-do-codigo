@@ -2,9 +2,11 @@ package br.com.zupacademy.beatriz.casadocodigo.autor;
 
 import br.com.zupacademy.beatriz.casadocodigo.autor.dto.CompleteAutorDTO;
 import br.com.zupacademy.beatriz.casadocodigo.autor.form.AutorForm;
+import br.com.zupacademy.beatriz.casadocodigo.validations.ExistingAutorEmailValidator;
 import br.com.zupacademy.beatriz.casadocodigo.validations.ExistingEmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -19,6 +21,15 @@ public class AutorController {
 
     @Autowired
     AutorRepository autorRepository;
+
+    @Autowired
+    ExistingAutorEmailValidator existingAutorEmailValidator;
+
+    @InitBinder
+    public void init(WebDataBinder binder) {
+        binder.addValidators(existingAutorEmailValidator);
+    }
+
 
     @GetMapping
     public void show() {
@@ -36,10 +47,12 @@ public class AutorController {
     public ResponseEntity<CompleteAutorDTO> addNewAutor(@RequestBody @Valid AutorForm autorForm, UriComponentsBuilder uriBuilder) throws ExistingEmailException {
 
         Autor autor = autorForm.register();
-        Autor existingAutor = autorRepository.findByEmail(autorForm.getEmail());
+        /*
+        * Autor existingAutor = autorRepository.findByEmail(autorForm.getEmail());
         if (existingAutor != null) {
             throw new ExistingEmailException(autor.getEmail());
         }
+        * */
 
         autorRepository.save(autor);
 

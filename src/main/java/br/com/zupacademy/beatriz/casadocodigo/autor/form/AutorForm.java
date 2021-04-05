@@ -32,7 +32,15 @@ public class AutorForm {
         return new Autor(name, email, description);
     }
 
-   public String getEmail() {
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getEmail() {
         return email;
     }
 
