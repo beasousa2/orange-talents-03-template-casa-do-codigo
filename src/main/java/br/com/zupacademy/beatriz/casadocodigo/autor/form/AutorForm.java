@@ -2,6 +2,7 @@ package br.com.zupacademy.beatriz.casadocodigo.autor.form;
 
 import br.com.zupacademy.beatriz.casadocodigo.autor.Autor;
 import br.com.zupacademy.beatriz.casadocodigo.autor.AutorRepository;
+import br.com.zupacademy.beatriz.casadocodigo.validations.anotations.UniqueValue;
 import com.sun.istack.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class AutorForm {
     @NotNull
     @NotEmpty(message = "E-mail é obrigatorio!")
     @Email(message = "E-mail precisa ser um tipo válido")
+    @UniqueValue(value = "email", className = Autor.class, message = "Email já está cadastrado")
     private String email;
 
     @NotNull

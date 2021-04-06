@@ -5,6 +5,7 @@ import org.springframework.web.bind.ServletRequestBindingException;
 
 public class ExistingEmailException extends ServletRequestBindingException {
 
+    @Deprecated
     public ExistingEmailException(String email) {
         super("Email já cadastrado: " + email);
     }

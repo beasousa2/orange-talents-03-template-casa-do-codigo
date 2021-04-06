@@ -22,13 +22,16 @@ public class AutorController {
     @Autowired
     AutorRepository autorRepository;
 
-    @Autowired
+    /*
+    * @Autowired
     ExistingAutorEmailValidator existingAutorEmailValidator;
 
     @InitBinder
     public void init(WebDataBinder binder) {
         binder.addValidators(existingAutorEmailValidator);
     }
+    * */
+
 
 
     @GetMapping
