@@ -12,13 +12,17 @@ import java.lang.annotation.*;
 @Repeatable(UniqueValue.List.class)
 public @interface UniqueValue {
     String message() default "{br.com.zupacademy.beatriz.cadadocodigo.validations.ValueAlreadyExist}";
+
     String value();
+
     Class<?> className();
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 
     @Retention(RetentionPolicy.RUNTIME)
-    @Target({ElementType.FIELD})
+    @Target(ElementType.FIELD)
     @interface List {
         UniqueValue[] value();
     }

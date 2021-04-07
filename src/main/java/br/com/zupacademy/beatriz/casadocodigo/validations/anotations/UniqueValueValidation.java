@@ -1,9 +1,5 @@
 package br.com.zupacademy.beatriz.casadocodigo.validations.anotations;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
