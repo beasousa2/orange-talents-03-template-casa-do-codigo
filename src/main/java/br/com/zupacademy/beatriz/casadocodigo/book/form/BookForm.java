@@ -8,7 +8,7 @@ import br.com.zupacademy.beatriz.casadocodigo.category.CategoryRepository;
 import br.com.zupacademy.beatriz.casadocodigo.validations.anotations.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,7 +16,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class BookForm {
 
@@ -46,10 +46,10 @@ public class BookForm {
     private String isbn;
 
     @Future
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    //@DateTimeFormat(pattern = "dd/MM/yyyy", iso = DateTimeFormat.ISO.DATE) , shape = JsonFormat.Shape.STRING, timezone = "UTC"
-    private LocalDateTime publicationDate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
+    private LocalDate publicationDate;
 
     @NotNull(message = "Autor é obirgatório")
     private Long autorId;
@@ -66,7 +66,7 @@ public class BookForm {
                         price,
                         pagesNumber,
                         isbn,
-                        publicationDate,
+                        this.getPublicationDate(),
                         autor,
                         category);
     }
@@ -95,7 +95,7 @@ public class BookForm {
         return isbn;
     }
 
-    public LocalDateTime getPublicationDate() {
+    public LocalDate  getPublicationDate() {
         return publicationDate;
     }
 
@@ -108,7 +108,7 @@ public class BookForm {
     }
 
     //somente para o JSON poder fazer o parse da data
-    public void setPublicationDate(LocalDateTime publicationDate) {
+    public void setPublicationDate(LocalDate publicationDate) {
         this.publicationDate = publicationDate;
     }
 }

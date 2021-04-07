@@ -1,11 +1,10 @@
 package br.com.zupacademy.beatriz.casadocodigo.book.dto;
 
-import br.com.zupacademy.beatriz.casadocodigo.autor.Autor;
 import br.com.zupacademy.beatriz.casadocodigo.book.Book;
-import br.com.zupacademy.beatriz.casadocodigo.category.Category;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.ManyToOne;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class BookDTO {
 
@@ -16,7 +15,9 @@ public class BookDTO {
     private Double price;
     private Integer pagesNumber;
     private String isbn;
-    private LocalDateTime publicationDate;
+    //@JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate publicationDate;
     private String category;
     private String autor;
 
@@ -62,7 +63,7 @@ public class BookDTO {
         return isbn;
     }
 
-    public LocalDateTime getPublicationDate() {
+    public LocalDate getPublicationDate() {
         return publicationDate;
     }
 

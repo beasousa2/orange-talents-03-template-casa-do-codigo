@@ -11,6 +11,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -45,7 +46,7 @@ public class Book {
 
     @Future
     //@JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
-    private LocalDateTime publicationDate;
+    private LocalDate publicationDate;
 
     @NotNull
     @ManyToOne
@@ -64,7 +65,7 @@ public class Book {
                 Double price,
                 Integer pagesNumber,
                 String isbn,
-                LocalDateTime publicationDate,
+                LocalDate publicationDate,
                 Autor autor,
                 Category category) {
         this.title = title;
@@ -106,7 +107,7 @@ public class Book {
         return isbn;
     }
 
-    public LocalDateTime getPublicationDate() {
+    public LocalDate getPublicationDate() {
         return publicationDate;
     }
 
