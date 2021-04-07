@@ -4,6 +4,7 @@ import br.com.zupacademy.beatriz.casadocodigo.autor.Autor;
 import br.com.zupacademy.beatriz.casadocodigo.category.Category;
 import br.com.zupacademy.beatriz.casadocodigo.validations.anotations.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -78,6 +79,7 @@ public class Book {
         this.autor = autor;
         this.category = category;
     }
+
 
     public Long getId() {
         return id;

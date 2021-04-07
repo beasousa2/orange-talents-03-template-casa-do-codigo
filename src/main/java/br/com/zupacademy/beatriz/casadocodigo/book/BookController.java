@@ -2,6 +2,7 @@ package br.com.zupacademy.beatriz.casadocodigo.book;
 
 import br.com.zupacademy.beatriz.casadocodigo.autor.AutorRepository;
 import br.com.zupacademy.beatriz.casadocodigo.book.dto.BookDTO;
+import br.com.zupacademy.beatriz.casadocodigo.book.dto.BookDetailsDTO;
 import br.com.zupacademy.beatriz.casadocodigo.book.form.BookForm;
 import br.com.zupacademy.beatriz.casadocodigo.category.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("books")
@@ -27,7 +30,12 @@ public class BookController {
     @Autowired
     AutorRepository autorRepository;
 
-    public void show() { }
+    @GetMapping
+    public ResponseEntity<List<BookDetailsDTO>> show() {
+        List<Book> books = bookRepository.findAll();
+        List<BookDetailsDTO> bookDetails = books.stream().map(BookDetailsDTO::new).collect(Collectors.toList());
+        return ResponseEntity.ok().body(bookDetails);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<BookDTO> returnById(@PathVariable Long id) {
