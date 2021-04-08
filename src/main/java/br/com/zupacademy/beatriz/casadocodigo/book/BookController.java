@@ -3,6 +3,7 @@ package br.com.zupacademy.beatriz.casadocodigo.book;
 import br.com.zupacademy.beatriz.casadocodigo.autor.AutorRepository;
 import br.com.zupacademy.beatriz.casadocodigo.book.dto.BookDTO;
 import br.com.zupacademy.beatriz.casadocodigo.book.dto.BookDetailsDTO;
+import br.com.zupacademy.beatriz.casadocodigo.book.dto.CompleteBookDTO;
 import br.com.zupacademy.beatriz.casadocodigo.book.form.BookForm;
 import br.com.zupacademy.beatriz.casadocodigo.category.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,11 @@ public class BookController {
         URI uri = uriBuilder.path("/books/{id}").buildAndExpand(book.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new BookDTO(book));
+    }
+
+    @GetMapping("/details/{id}")
+    public ResponseEntity<CompleteBookDTO> returnBookById(@PathVariable Long id) {
+        Optional<Book> book = bookRepository.findById(id);
+        return book.map(value -> ResponseEntity.ok(new CompleteBookDTO(value))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
